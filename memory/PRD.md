@@ -1,43 +1,39 @@
 # PRD — Search Typeahead (HLD Assignment)
 
-## Original problem statement
-University HLD assignment: Build a Search Typeahead system. Requirements:
-- React frontend + Node.js + Express backend
-- Typeahead (top-10 suggestions, popularity-ranked, ≥100k unique queries)
-- Distributed cache with consistent hashing
-- Trending searches (count + recency)
-- Batch writes for search-count updates
-- Modular, well-commented code; full HLD documentation
-- Grading: 60 basic / 20 trending / 20 batch writes
+## Current state (post-simplification, Feb 2026)
 
-## Architecture
-- React 19 + shadcn/ui frontend (search box, trending list, cache debug panel, hash ring viz, architecture doc page)
-- FastAPI gateway on :8001 (supervisor-locked) → proxies /api/* to internal Node Express on :8002
-- Node services: Trie, ConsistentHashRing (64 vnodes × 3 nodes), CacheCluster (LRU+TTL), BatchWriter, TrendingService (exp decay halfLife=5min), Metrics
-- MongoDB primary store; queryStore.js auto-generates ~150k synthetic queries on first boot
+UI simplified for university submission:
+- Removed: /architecture page, live metrics dashboard, hash ring visualizer
+- Kept: search box, suggestion dropdown, basic/trending mode tabs, trending list, minimal 3-counter analytics strip
 
-## What's implemented (Feb 2026)
-- [x] Synthetic dataset generator (~124k–150k queries, Zipf-ish counts)
-- [x] In-memory Trie with per-node topK (O(L+K) suggest)
-- [x] 3-node distributed cache simulation + consistent-hash ring routing
-- [x] Cache hit/miss reporting, TTL, LRU eviction, per-node stats
-- [x] Batch writer: in-memory aggregate Map, 2s/500-item flush, bulkWrite, prefix invalidation, retry-on-fail
-- [x] Trending: per-query decayed counter, blend with historical count, rerank
-- [x] /api/suggest, /search, /trending, /cache/debug, /metrics, /ring, /admin/{flush,clear-cache,reset-metrics}
-- [x] Frontend: debounced search box, suggestion dropdown, mode tabs, live metrics panel, hash-ring SVG, full architecture page with ASCII diagrams
-- [x] README with setup, API docs, complexity table, scaling strategy, demo script
+Backend untouched — all HLD logic preserved in services/.
 
-## User personas
-- University student presenting to professor in viva (primary)
-- Professor / evaluator checking the rubric items
+## Documentation deliverables (root of /app)
+- README.md — overview, features, setup, folder structure, how to run
+- ARCHITECTURE.md — diagrams (system, request, cache), CH explanation, batch-write explanation, complexity, scaling
+- PROJECT_REPORT.md — problem statement, requirements, design decisions, implementation, results, future scope
+- TESTING_GUIDE.md — how to test each feature with curl + expected output
+- SUBMISSION_CHECKLIST.md — requirement → file mapping table (+ grading-rubric map)
 
-## Backlog (P1/P2)
-- P1: Add keyboard navigation hints in the UI (mostly there)
-- P2: Server-Sent Events for live trending/metrics (currently polled every 1.5–3s)
-- P2: Persist batch buffer to disk WAL for crash safety
-- P2: Graph of latency p50/p95 over time
-- P2: Real distributed cache (Redis cluster) instead of in-process simulation
+## Implementation files (unchanged)
+- backend/server.py — FastAPI gateway → Node :8002 proxy
+- backend/server.js — Express bootstrap (Trie, ring, cache, batch, trending)
+- backend/src/services/{trie,consistentHash,cacheCluster,batchWriter,trendingService,metrics,queryStore}.js
+- backend/src/routes.js — all /api endpoints
+- frontend/src/pages/SearchPage.jsx — single page
+- frontend/src/components/{SearchBox,TrendingSearches,SearchAnalytics}.jsx
+- frontend/src/lib/api.js, hooks/useDebounce.js
+
+## Removed files
+- frontend/src/pages/ArchitecturePage.jsx
+- frontend/src/components/CacheDebugPanel.jsx
+- frontend/src/components/HashRingVisualizer.jsx
+
+## Verification
+- Backend smoke tests pass (suggest, submit, trending, cache/debug, metrics)
+- Dataset: 150,000 unique queries
+- 13/13 backend pytest from iteration_1 still applies (code paths unchanged)
 
 ## Next tasks
-- Run testing_agent_v3 for backend + frontend end-to-end verification
-- Capture screenshots for the submission report
+- (Optional) Capture screenshots into /app/screenshots/ for the GitHub submission
+- (Optional) Add a SETUP_VIDEO_SCRIPT.md if user wants a recorded demo
