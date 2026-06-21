@@ -29,6 +29,10 @@ function generateSyntheticDataset(target = 150_000) {
     "kettle","oven","microwave","fridge","sofa","chair","desk","backpack","shoes","sneakers","jeans",
     "shirt","dress","jacket","perfume","sunglasses","book","novel","textbook","course","tutorial",
     "guitar","piano","drum","yoga-mat","dumbbell","treadmill","bicycle","helmet",
+    // tech/learning queries — the assignment example explicitly mentions "java tutorial"
+    "java","python","react","node","express","mongodb","kubernetes","docker","linux","javascript",
+    "spring","django","fastapi","graphql","postgres","redis","kafka","aws","azure","gcp",
+    "algorithms","leetcode","system-design","interview","resume","portfolio",
   ];
   const verbs = [
     "buy","review","compare","cheap","near-me","online","price","deals","sale","amazon","flipkart",

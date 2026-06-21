@@ -39,6 +39,9 @@ export default function SearchBox({ mode, onSubmitted }) {
         setCacheInfo(data.cache || null);
         setLatency(typeof data.latencyMs === "number" ? data.latencyMs : null);
         setActive(-1);
+        // Re-open the dropdown when results change (e.g. user switched modes
+        // and the dropdown was closed by the input losing focus).
+        setOpen(true);
       } catch (e) {
         if (!cancelled) setError("Failed to fetch suggestions");
       } finally {
