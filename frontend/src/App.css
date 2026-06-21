@@ -1,0 +1,38 @@
+/* Clean, distinctive minimal style. Avoids the AI-slop purple-on-white. */
+
+.App {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Use a serif accent font for prominent headings to give the project a
+   "designed" look that differentiates it from generic Tailwind starters. */
+.font-display {
+  font-family: "Instrument Serif", "Cormorant Garamond", Georgia, serif;
+  letter-spacing: -0.01em;
+}
+
+.mono {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-feature-settings: "ss01", "ss02";
+}
+
+/* Subtle grid backdrop for the architecture page so diagrams don't feel
+   floating against pure white. */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(24, 24, 27, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(24, 24, 27, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.4; transform: scale(0.85); }
+}
+.pulse-dot { animation: pulse-dot 1.5s ease-in-out infinite; }
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fade-up 180ms ease-out; }
