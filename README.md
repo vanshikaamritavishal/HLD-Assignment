@@ -171,8 +171,6 @@ or change `DB_NAME` in `.env` to a fresh name.
 search-typeahead/
 ├── README.md                  # this file
 ├── ARCHITECTURE.md            # diagrams + design explanation
-├── PROJECT_REPORT.md          # full report (problem, design, results)
-├── PROJECT_REPORT.pdf         # printable submission report
 │
 ├── backend/
 │   ├── server.js              # Node + Express (the actual backend)
@@ -222,18 +220,7 @@ Full request/response details are in `PROJECT_REPORT.pdf` §4 (API Documentation
 
 ---
 
-## 9 · Where the architecture lives
-
-This README intentionally stays focused on getting the project running. The
-full design is in:
-
-- **[ARCHITECTURE.md](./ARCHITECTURE.md)** — diagrams (system, request, cache, batch), CH explanation, scaling notes
-- **[PROJECT_REPORT.md](./PROJECT_REPORT.md)** — problem statement, requirements, design decisions, implementation, results
-- **[PROJECT_REPORT.pdf](./PROJECT_REPORT.pdf)** — the printable submission report (16 pages, all the above + screenshots)
-
----
-
-## 10 · Troubleshooting
+## 9 · Troubleshooting
 
 | Symptom                                              | Likely cause / fix                                                                  |
 |-------------------------------------------------------|--------------------------------------------------------------------------------------|
@@ -242,3 +229,6 @@ full design is in:
 | First boot hangs at "generating synthetic dataset…"   | Normal — wait 10–15 s. The progress is printed line by line.                          |
 | Port 8001 already in use                              | Change `PORT` in `backend/.env` **and** `REACT_APP_BACKEND_URL` in `frontend/.env`.   |
 | `yarn install` fails with peer-dependency errors      | Use Node 18 or 20 (not 16, not 22).                                                  |
+
+
+- Vanshika Amrita Vishal
