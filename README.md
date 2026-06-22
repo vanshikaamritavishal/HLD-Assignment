@@ -230,5 +230,3 @@ Full request/response details are in `PROJECT_REPORT.pdf` §4 (API Documentation
 | Port 8001 already in use                              | Change `PORT` in `backend/.env` **and** `REACT_APP_BACKEND_URL` in `frontend/.env`.   |
 | `yarn install` fails with peer-dependency errors      | Use Node 18 or 20 (not 16, not 22).                                                  |
 
-
-- Vanshika Amrita Vishal
